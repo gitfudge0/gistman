@@ -46,7 +46,6 @@ function getEvernoteAccessToken(client) {
   });
 }
 
-
 /**
  * @name getNoteStore
  * @description Get an instance of the note store
@@ -75,6 +74,27 @@ function getUserStore(client) {
     try {
       const userStore = await client.getUserStore();
       resolve(userStore);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+/**
+ * @name makeNotebook
+ * @description Creates a new notebook
+ * @param {NoteStore} noteStore - An instance of note store
+ * @param {string} name - Name of the notebook
+ * @returns
+ */
+function makeNotebook(noteStore, name) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const Notebook = Evernote.Types.Notebook();
+      Notebook.name = name;
+
+      const notebook = await noteStore.createNotebook(Notebook);
+      resolve(notebook);
     } catch (error) {
       reject(error);
     }
@@ -116,5 +136,6 @@ module.exports = {
   getEvernoteAccessToken,
   getNoteStore,
   getUserStore,
+  makeNotebook,
   makeNote,
 };

@@ -16,7 +16,8 @@ async function main() {
     const selectedNote = notebooks.filter(curr => curr.name === 'GistNoteIt')[0];
 
     // Make a new note
-    await Evernote.makeNote(noteStore, 'Test Title', 'Test content', selectedNote);
+    // await Evernote.makeNote(noteStore, 'Test Title', 'Test content', selectedNote);
+    await Evernote.makeNotebook(noteStore, 'Test Notebook')
   } catch (error) {
     console.log(`\x1b[31mError caught\x1b[0m: ${JSON.stringify(error)}`);
     console.trace(error);
