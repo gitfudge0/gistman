@@ -81,6 +81,71 @@ function getUserStore(client) {
 }
 
 /**
+ * @name getNotebook
+ * @description Get user notebook
+ * @param {NoteStore} noteStore
+ * @param {string} guid
+ * @returns
+ */
+function getNotebook(noteStore, guid) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const notebook = await noteStore.getNotebook(guid);
+      resolve(notebook);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+/**
+ * @name listNotes
+ * @description Get list of notes in a notebook
+ * @param {NoteStore} noteStore
+ * @param {string} notebookGuid
+ * @returns List of notes
+ */
+function listNotes(noteStore, notebookGuid) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const filter = new Evernote.NoteStore.NoteFilter({
+        notebookGuid,
+      });
+
+      const resultSpec = {
+        includeTitle: true,
+        includeNotebookGuid: true,
+        includeCreated: true,
+        includeUpdated: true,
+      };
+
+      const noteList = await noteStore.findNotesMetadata(filter, 0, 100, resultSpec);
+      resolve(noteList);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+/**
+ * @name getNoteContent
+ * @description Get the content of a note
+ * @param {NoteStore} noteStore
+ * @param {string} guid
+ * @returns content of the note
+ */
+function getNoteContent(noteStore, guid) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const content = await noteStore.getNoteContent(guid);
+      resolve(content);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+/**
  * @name makeNotebook
  * @description Creates a new notebook
  * @param {NoteStore} noteStore - An instance of note store
@@ -136,6 +201,9 @@ module.exports = {
   getEvernoteAccessToken,
   getNoteStore,
   getUserStore,
+  getNotebook,
+  listNotes,
+  getNoteContent,
   makeNotebook,
   makeNote,
 };
