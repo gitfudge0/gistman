@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A CLI tool to save gists to Github and manage them.",
   "main": "index.js",
+  "bin": {
+    "gistman": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

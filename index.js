@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const printer = require('./lib/printer');
 const github = require('./lib/github');
 const CONSTANTS = require('./lib/constants');
