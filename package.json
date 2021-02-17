@@ -1,6 +1,6 @@
 {
   "name": "gistman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI tool to save gists to Github and manage them.",
   "main": "index.js",
   "bin": {
